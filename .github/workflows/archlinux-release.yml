@@ -14,7 +14,7 @@ jobs:
       - name: Install dependencies
         run: |
           pacman -Syu --noconfirm --ignore=filesystem
-          pacman -S --noconfirm --needed base-devel git sudo
+          pacman -S --noconfirm --needed base-devel git sudo nodejs
 
       - name: Checkout repository
         uses: actions/checkout@v4
