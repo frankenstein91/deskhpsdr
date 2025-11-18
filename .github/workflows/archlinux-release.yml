@@ -31,11 +31,8 @@ jobs:
           # The -s flag installs dependencies from the PKGBUILD
           su builduser -c "makepkg -s --noconfirm"
 
-      - name: Create Release and Upload Asset
-        uses: softprops/action-gh-release@v1
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
-          # The action will find the package file.
-          # The pattern is based on the default naming scheme of makepkg.
-          files: "deskhpsdr-git-*.pkg.tar.zst"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          name: deskhpsdr-arch-package
+          path: deskhpsdr-git-*.pkg.tar.zst
