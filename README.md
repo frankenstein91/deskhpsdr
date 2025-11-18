@@ -1,3 +1,5 @@
+![GitHub Workflow Status](https://github.com/dl1bz/deskhpsdr/actions/workflows/release.yml/badge.svg)
+
 # deskHPSDR by DL1BZ
 
 <img src="https://github.com/dl1bz/deskhpsdr/blob/master/release/deskhpsdr/screenshot.png" width="1024px" />

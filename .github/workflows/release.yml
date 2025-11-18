@@ -1,0 +1,41 @@
+name: Build and Release Arch Linux Package
+
+on:
+  push:
+    tags:
+      - '*.*.*' # Trigger on tags like 1.2.33
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:latest
+    steps:
+      - name: Install dependencies
+        run: |
+          pacman -Syu --noconfirm
+          pacman -S --noconfirm --needed base-devel git sudo
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for git describe to get the version right
+
+      - name: Build the package
+        run: |
+          # Run makepkg as a non-root user to avoid issues
+          useradd -m builduser
+          # Grant the build user passwordless sudo rights to install dependencies
+          echo "builduser ALL=(ALL) NOPASSWD: /usr/bin/pacman" >> /etc/sudoers
+          chown -R builduser:builduser .
+          # The -s flag installs dependencies from the PKGBUILD
+          su builduser -c "makepkg -s --noconfirm"
+
+      - name: Create Release and Upload Asset
+        uses: softprops/action-gh-release@v1
+        with:
+          # The action will find the package file.
+          # The pattern is based on the default naming scheme of makepkg.
+          files: "deskhpsdr-git-*.pkg.tar.zst"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
