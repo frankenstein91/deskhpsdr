@@ -2,8 +2,8 @@ name: Build and Release Arch Linux Package
 
 on:
   push:
-    tags:
-      - '*.*.*' # Trigger on tags like 1.2.33
+    branches:
+      - 'ArchLinux'
 
 jobs:
   build-and-release:

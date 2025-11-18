@@ -1,4 +1,4 @@
-![GitHub Workflow Status](https://github.com/dl1bz/deskhpsdr/actions/workflows/release.yml/badge.svg)
+![GitHub Workflow Status](https://github.com/dl1bz/deskhpsdr/actions/workflows/archlinux-release.yml/badge.svg)
 
 # deskHPSDR by DL1BZ
 
