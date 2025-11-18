@@ -33,7 +33,11 @@ makedepends=('git' 'cmake' 'gcc-fortran' 'cppcheck' 'dos2unix')
 optdepends=('libad9361-iio: for AD9361 support')
 provides=("${_pkgname}")
 conflicts=("${_pkgname}")
-source=("${_pkgname}::git+${url}.git")
+if [ -n "$CI" ]; then
+  source=("${_pkgname}::.")
+else
+  source=("${_pkgname}::git+${url}.git")
+fi
 sha256sums=('SKIP')
 
 pkgver() {
